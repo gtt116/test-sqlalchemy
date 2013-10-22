@@ -1,6 +1,17 @@
 """
 The script show out a result that when insert execute cocurrent up to
 10,000 sqlalchemy will be bottleneck. Sqlite vs alchemy is 40/ 62
+
+It does't means sqlalchemy is not effective. The key point is cocurrent
+request number. Because you should not insert the objects into database
+one by one, you can put all of then into one sql command, then execute
+the command, it will speed up.
+
+At this point, the bottleneck is there are too many request at one time,
+you can't make all the request into a sql command, you have to make many
+many sql request to database. In this scenario you should think about
+replace sqlalchemy with lower api, such as `sqlite3`.
+
 """
 import sqlite3
 import time
